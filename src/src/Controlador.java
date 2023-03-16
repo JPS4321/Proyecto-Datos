@@ -4,7 +4,7 @@ public class Controlador {
     HashMap<String, String> capitalCities = new HashMap<String, String>();
 
     //Lector de archivo
-    String DIr = "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Datos\\src\\src\\Dats.txt";
+    String Dir = "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Datos\\src\\src\\Dats.txt";
     Reader read = new Reader();
 
     public void Iniciar(){
@@ -12,8 +12,11 @@ public class Controlador {
     }
 
 
+
+
+
     public void Reader(){
-        try(BufferedReader br = new BufferedReader(new FileReader(Dire))){
+        try(BufferedReader br = new BufferedReader(new FileReader(Dir))){
             String ln;
             while ((ln = br.readLine()) != null){
                 String[] partes = ln.split("\\|");
@@ -39,38 +42,3 @@ public class Controlador {
     }
 
     }
-
-public class FileReaderExample {
-    public static void main(String[] args) {
-        String filePath = "path/to/your/file.txt";
-        List<String> lines = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Process the array of lines as required
-        for (String line : lines) {
-            System.out.println(line);
-        }
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-}
-

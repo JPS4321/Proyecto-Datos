@@ -1,14 +1,5 @@
+
 public class Interpreter {
-
-
-
-
-
-
-
-
-
-
 
 
 

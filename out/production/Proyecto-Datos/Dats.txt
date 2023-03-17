@@ -1,1 +1,3 @@
-(+ 5 4)
+(defun sumar (a b)
+(+ a b))
+(sumar 2 3)

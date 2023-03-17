@@ -61,6 +61,11 @@ class AritmeticaTest {
         Assertions.assertEquals("+++2243", resp);
     }
 
+    
+    /** 
+     * @param exp
+     * @return String
+     */
     private String deleteParents(String exp) {
         exp = exp.replace("(","");
         exp = exp.replace(")","");

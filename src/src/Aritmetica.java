@@ -1,5 +1,10 @@
 import java.util.*;
 public class Aritmetica {
+    
+    /** 
+     * @param Expresion
+     * @return int
+     */
     public static int Matematicas(String Expresion) {
         Stack<Integer> stack = new Stack<>();
         String[] tokens = Expresion.split(" ");
@@ -25,6 +30,11 @@ public class Aritmetica {
         return stack.pop();
     }
 
+    
+    /** 
+     * @param str
+     * @return boolean
+     */
     public static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);

@@ -3,6 +3,10 @@ import java.util.*;
 public class Reader{
     ArrayList<String> lineas = new ArrayList<String>();
 
+    
+    /** 
+     * @param Arch
+     */
     public void Leer(String Arch){
         try (BufferedReader br = new BufferedReader(new FileReader(Arch))) {
             String lineaActual;

@@ -226,6 +226,11 @@ public class Controlador {
             }
         }
 
+        
+        /** 
+         * @param i
+         * @param Temporal
+         */
         public void Interpretes(int i, String Temporal){
             if ((Temporal.contains("+")) || (Temporal.contains("-")) || (Temporal.contains("*")) || (Temporal.contains("/"))){
                 Temporal = Temporal.substring(1, Temporal.length() - 1);

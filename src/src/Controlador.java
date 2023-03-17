@@ -14,6 +14,7 @@ public class Controlador {
     ArrayList<String> KeysNormal = new ArrayList<String>();
     String[] Tokens;
     String Temporal = "";
+    Object[] lista;
 
     public void Iniciar(){
         Reader read = new Reader();
@@ -141,8 +142,29 @@ public class Controlador {
                     System.out.println("NIL");
                 }
             }
+            if(Temporal.contains("cond")){
+                Tokens = Temporal.split(" ");
+                i = 0;
+                while (i < lista.length) {
+                    Object[] listN = (Object[]) lista[i];
+                    if (listN[0].equals("t")) {
+                        return;
+                    } else if (listN[0] instanceof Boolean && (Boolean) listN[0]) {
+                        return;
+                    }
+                    i++;
+                }
+                return;
+            }
 
-
+            /*
+            if (x < 0) {
+                System.out.println("x es negativo");
+            } else if (x == 0) {
+                System.out.println("x es cero");
+            } else if (x > 0) {
+                System.out.println("x es positivo");
+            }*/
 
 
         }

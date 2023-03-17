@@ -6,15 +6,22 @@ public class Controlador {
     //Lector de archivo
     String Dir = "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Datos\\src\\src\\Dats.txt";
     ArrayList<String> Cadenas = new ArrayList<String>();
+    ArrayList<String> KeyDefun = new ArrayList<String>();
     HashMap<String, String> VariablesDefinir = new HashMap<>();
     HashMap<String, ArrayList<String>> Listas = new HashMap<>();
+    HashMap<String, ArrayList<String>> Funciones = new HashMap<>();
     Scanner sc = new Scanner(System.in);
     String Respuesta = "";
     ArrayList<String> KeysLists = new ArrayList<String>();
     ArrayList<String> KeysNormal = new ArrayList<String>();
+    ArrayList<String> DEFUN = new ArrayList<String>();
     String[] Tokens;
     String Temporal = "";
     Object[] lista;
+    Boolean loops = true;
+    String defunkey = "";
+    int SumaParentesis;
+
 
     public void Iniciar(){
         Reader read = new Reader();
@@ -24,8 +31,35 @@ public class Controlador {
         read.Leer(Respuesta);
         Cadenas = read.lineas;
         for(int i = 0;i <= Cadenas.size()-1;i++) {
-
-            if ((Temporal.contains("+")) || (Temporal.contains("-")) || (Temporal.contains("*")) || (Temporal.contains("/"))) {
+            Temporal = Cadenas.get(i);
+            if(Temporal.contains("defun") || (loops == false) ){
+                loops = false;
+                if(Temporal.contains("defun")){
+                    defunkey = "";
+                    SumaParentesis = 1;
+                    Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length());
+                    Tokens = Temporal.split(" ");
+                    int CI = 0;
+                    int CF = 0;
+                    String[] valtemp = Temporal.split("");
+                    for(int d = 0; d <= valtemp.length-1;d++){
+                        if(valtemp[d].equals("(")){
+                            CI = d;
+                            SumaParentesis++;
+                        }
+                        if(valtemp[d].equals(")")) {
+                            SumaParentesis--;
+                            CF = d;
+                            String temporal2 = Temporal.substring(CI+1,CF);
+                            ArrayList<String> tempo = new ArrayList<String>();
+                            tempo.add(temporal2);
+                            Funciones.put(Tokens[1],tempo);
+                            defunkey = Tokens[1];
+                        }
+                    }
+                }
+            }
+            if (((Temporal.contains("+")) || (Temporal.contains("-")) || (Temporal.contains("*")) || (Temporal.contains("/"))) && (loops)) {
                 Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 if (!(Temporal.contains("quote"))) {
                     if (!KeysNormal.isEmpty()) {
@@ -42,7 +76,7 @@ public class Controlador {
                 }
 
             }
-            if (Temporal.contains("quote")) {
+            if (Temporal.contains("quote") && (loops)) {
                 Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 int Cont = 0;
                 int Cont2 = 0;
@@ -58,7 +92,7 @@ public class Controlador {
                     }
                 }
             }
-            if (Temporal.contains("setq")) {
+            if (Temporal.contains("setq") && (loops)) {
                 Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 System.out.println("Variables definidas");
                 Tokens = Temporal.split(" ");
@@ -78,7 +112,6 @@ public class Controlador {
                         if (valortemporal[u].equals(")")) {
                             ContadorF = u;
                             String valor = Temporal.substring(ContadorI, ContadorF);
-                            String[] val = valor.split("");
                             ArrayList<String> Valores = new ArrayList<String>();
                             Collections.addAll(Valores, valor);
                             Listas.put(Tokens[1], Valores);
@@ -88,7 +121,7 @@ public class Controlador {
                     }
                 }
             }
-            if (Temporal.contains("atom")) {
+            if (Temporal.contains("atom") && (loops)) {
                 Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 Tokens = Temporal.split(" ");
                 boolean kis = false;
@@ -111,7 +144,7 @@ public class Controlador {
 
 
             }
-            if (Temporal.contains("equal")) {
+            if (Temporal.contains("equal") && (loops)) {
                 Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 boolean Comparacion = false;
                 Tokens = Temporal.split(" ");
@@ -145,7 +178,7 @@ public class Controlador {
                     System.out.println("NIL");
                 }
             }
-            if(Temporal.contains("cond")){
+            if(Temporal.contains("cond")&& (loops)){
                 Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 Tokens = Temporal.split(" ");
                 i = 0;
@@ -160,10 +193,36 @@ public class Controlador {
                 }
                 return;
             }
-            if(Temporal.contains("Defun")){
+            if(!(Temporal.contains("defun")) && !loops){
+                String[] valtemp = Temporal.split("");
+                for(int h = 0; h<= valtemp.length-1;h++){
+                    if(valtemp[h].equals("(")){
+                        SumaParentesis++;
+                    }
+                    if(valtemp[h].equals(")")){
+                        SumaParentesis--;
+                    }
+                }
+                if(SumaParentesis == 0){
+                    Temporal = Temporal.substring(0,Temporal.length()-1);
+                    Funciones.get(defunkey).add(Temporal);
+                    loops = true;
+                    System.out.println("Funcion agregada con exito");
+                }
+                else {
+                    Funciones.get(defunkey).add(Temporal);
+                }
+            }
+
+
+
+
+
+
 
             }
-            
+
+
 
             /*
             if (x < 0) {
@@ -177,7 +236,5 @@ public class Controlador {
 
         }
         }
-
-    }
 
 

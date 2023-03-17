@@ -1,3 +1,1 @@
-(setq numero1 10)
-(setq numero2 10)
-(equal numero1 numero2)
+(+ 5 4)

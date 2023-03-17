@@ -22,95 +22,124 @@ public class Controlador {
         //Respuesta = sc.nextLine();
         read.Leer(Respuesta);
         Cadenas = read.lineas;
-        for(int i = 0;i <= Cadenas.size()-1;i++){
-            Temporal = Cadenas.get(i).substring(1,Cadenas.get(i).length()-1);
+        for(int i = 0;i <= Cadenas.size()-1;i++) {
+            Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
 
 
-            if((Temporal.contains("+"))||(Temporal.contains("-"))||(Temporal.contains("*"))||(Temporal.contains("/"))){
-                if(!(Temporal.contains("quote"))){
-                    if(!KeysNormal.isEmpty()) {
+            if ((Temporal.contains("+")) || (Temporal.contains("-")) || (Temporal.contains("*")) || (Temporal.contains("/"))) {
+                if (!(Temporal.contains("quote"))) {
+                    if (!KeysNormal.isEmpty()) {
                         for (int m = 0; m <= KeysNormal.size() - 1; m++) {
-                            if(Temporal.contains(KeysNormal.get(m))){
-                               Temporal = Temporal.replace(KeysNormal.get(m),VariablesDefinir.get(KeysNormal.get(m)));
+                            if (Temporal.contains(KeysNormal.get(m))) {
+                                Temporal = Temporal.replace(KeysNormal.get(m), VariablesDefinir.get(KeysNormal.get(m)));
                             }
                         }
                     }
-                Temporal = Temporal.replace("(","");
-                Temporal = Temporal.replace(")","");
-                System.out.println("Operacion Artimetica Detectada");
-                System.out.println(Aritmetica.Matematicas(Temporal));
+                    Temporal = Temporal.replace("(", "");
+                    Temporal = Temporal.replace(")", "");
+                    System.out.println("Operacion Artimetica Detectada");
+                    System.out.println(Aritmetica.Matematicas(Temporal));
                 }
 
             }
-            if(Temporal.contains("quote")){
+            if (Temporal.contains("quote")) {
                 int Cont = 0;
                 int Cont2 = 0;
                 Tokens = Temporal.split("");
-                for(int p = 0; p <= Tokens.length-1;p++){
-                    if(Tokens[p].contains("(")){
+                for (int p = 0; p <= Tokens.length - 1; p++) {
+                    if (Tokens[p].contains("(")) {
                         Cont = p;
                     }
-                    if(Tokens[p].contains(")")){
+                    if (Tokens[p].contains(")")) {
                         Cont2 = p;
                         System.out.println("Operacion quote detectada: ");
-                        System.out.println(Temporal.substring(Cont+1,Cont2));
+                        System.out.println(Temporal.substring(Cont + 1, Cont2));
                     }
                 }
             }
-            if(Temporal.contains("setq")){
+            if (Temporal.contains("setq")) {
                 System.out.println("Variables definidas");
                 Tokens = Temporal.split(" ");
-                if(Tokens.length == 3) {
+                if (Tokens.length == 3) {
                     VariablesDefinir.put(Tokens[1], Tokens[2]);
                     String[] strings = VariablesDefinir.keySet().toArray(new String[VariablesDefinir.size()]);
                     KeysNormal = new ArrayList<String>(Arrays.asList(strings));
                 }
-                if(Tokens.length >3){
+                if (Tokens.length > 3) {
                     int ContadorI = 0;
                     int ContadorF = 0;
                     String[] valortemporal = Temporal.split("");
-                    for(int u = 0; u <= valortemporal.length-1;u++){
-                        if(valortemporal[u].equals("(")){
+                    for (int u = 0; u <= valortemporal.length - 1; u++) {
+                        if (valortemporal[u].equals("(")) {
                             ContadorI = u;
                         }
-                        if(valortemporal[u].equals(")")){
+                        if (valortemporal[u].equals(")")) {
                             ContadorF = u;
-                            String valor = Temporal.substring(ContadorI,ContadorF);
+                            String valor = Temporal.substring(ContadorI, ContadorF);
                             String[] val = valor.split("");
                             ArrayList<String> Valores = new ArrayList<String>();
-                            Collections.addAll(Valores,valor);
-                            Listas.put(Tokens[1],Valores);
+                            Collections.addAll(Valores, valor);
+                            Listas.put(Tokens[1], Valores);
                             String[] strings = Listas.keySet().toArray(new String[Listas.size()]);
                             KeysLists = new ArrayList<String>(Arrays.asList(strings));
                         }
                     }
                 }
             }
-            if(Temporal.contains("atom")){
+            if (Temporal.contains("atom")) {
                 Tokens = Temporal.split(" ");
                 boolean kis = false;
-                for(int b = 0; b <= KeysNormal.size()-1;b++){
-                    if(Tokens[1].equals(KeysNormal.get(b))){
+                for (int b = 0; b <= KeysNormal.size() - 1; b++) {
+                    if (Tokens[1].equals(KeysNormal.get(b))) {
                         System.out.println("T");
                         kis = true;
 
                     }
                 }
-                for(int j = 0; j <= KeysLists.size()-1;j++){
-                    if(Tokens[1].equals(KeysLists.get(j))){
+                for (int j = 0; j <= KeysLists.size() - 1; j++) {
+                    if (Tokens[1].equals(KeysLists.get(j))) {
                         System.out.println("NIL");
                         kis = true;
                     }
                 }
-                if(!kis){
+                if (!kis) {
                     System.out.println("No existe el atomo que busca");
                 }
 
 
             }
-            if(Temporal.contains("equal")){
+            if (Temporal.contains("equal")) {
+                boolean Comparacion = false;
+                Tokens = Temporal.split(" ");
+                try {
+                    if (VariablesDefinir.get(Tokens[1]).equals(VariablesDefinir.get(Tokens[2]))) {
+                        Comparacion = true;
+                    }
 
-                
+                } catch (Exception e) {
+                }
+                try {
+                    if (Listas.get(Tokens[1]).equals(Listas.get(Tokens[2]))) {
+                        Comparacion = true;
+                    }
+
+                } catch (Exception e) {
+                }
+                try {
+                    int numero1 = Integer.valueOf(Tokens[1]);
+                    int numero2 = Integer.valueOf(Tokens[2]);
+                    if (numero1 == numero2) {
+                        Comparacion = true;
+                    }
+
+                } catch (Exception e) {
+                }
+                if (Comparacion) {
+                    System.out.println("T");
+                }
+                if (!Comparacion) {
+                    System.out.println("NIL");
+                }
             }
 
 

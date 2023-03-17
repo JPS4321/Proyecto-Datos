@@ -6,7 +6,7 @@ import java.util.Stack;
 class AritmeticaTest {
 
     @Test
-    void evaluateExpression_shouldReturnCorrectResult() {
+    void evaluar() {
         String ex = "(+ (+ (+ 2 2) 4) 3)";
         Stack<Integer> num = new Stack<>();
         Stack<String> op = new Stack<>();
@@ -24,21 +24,21 @@ class AritmeticaTest {
                     op.push(x);
                     break;
                 case ")":
-                    Integer n2 = num.pop();
-                    Integer n1 = num.pop();
+                    Integer num2 = num.pop();
+                    Integer num1 = num.pop();
                     String operador = op.pop();
                     switch (operador){
                         case "+":
-                            num.push(n1+n2);
+                            num.push(num1+num2);
                             break;
                         case "-":
-                            num.push(n1-n2);
+                            num.push(num1-num2);
                             break;
                         case "/":
-                            num.push(n1/n2);
+                            num.push(num1/num2);
                             break;
                         case "*":
-                            num.push(n1*n2);
+                            num.push(num1*num2);
                             break;
                     }
 
@@ -53,15 +53,15 @@ class AritmeticaTest {
     }
 
     @Test
-    void deleteParentesis_shouldReturnExpressionWithoutParenthesis() {
+    void deleteParentesis() {
         String ex = "(+ (+ (+ 2 2) 4) 3)";
 
-        String resp = deleteParentesis(ex);
+        String resp = deleteParents(ex);
 
         Assertions.assertEquals("+++2243", resp);
     }
 
-    private String deleteParentesis(String exp) {
+    private String deleteParents(String exp) {
         exp = exp.replace("(","");
         exp = exp.replace(")","");
         exp = exp.replace(" ", "");

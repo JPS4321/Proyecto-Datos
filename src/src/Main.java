@@ -1,5 +1,9 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Controlador control = new Controlador();
+        control.Iniciar();
+//+ * 3 2 3
+
+
     }
 }

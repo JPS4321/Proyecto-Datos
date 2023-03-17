@@ -88,15 +88,28 @@ public class Controlador {
             }
             if(Temporal.contains("atom")){
                 Tokens = Temporal.split(" ");
-                for(int b = 0; b <= KeysNormal.size();b++){
+                boolean kis = false;
+                for(int b = 0; b <= KeysNormal.size()-1;b++){
                     if(Tokens[1].equals(KeysNormal.get(b))){
+                        System.out.println("T");
+                        kis = true;
 
                     }
-
+                }
+                for(int j = 0; j <= KeysLists.size()-1;j++){
+                    if(Tokens[1].equals(KeysLists.get(j))){
+                        System.out.println("NIL");
+                        kis = true;
+                    }
+                }
+                if(!kis){
+                    System.out.println("No existe el atomo que busca");
                 }
 
+
             }
-            if(Temporal.contains("cond")){
+            if(Temporal.contains("equal")){
+
                 
             }
 

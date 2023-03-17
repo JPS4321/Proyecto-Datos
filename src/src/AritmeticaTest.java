@@ -7,12 +7,12 @@ class AritmeticaTest {
 
     @Test
     void evaluateExpression_shouldReturnCorrectResult() {
-        String expresion = "(+ (+ (+ 2 2) 4) 3)";
-        Stack<Integer> numeros = new Stack<>();
-        Stack<String> operadores = new Stack<>();
+        String ex = "(+ (+ (+ 2 2) 4) 3)";
+        Stack<Integer> num = new Stack<>();
+        Stack<String> op = new Stack<>();
 
-        for (int i = 0; i < expresion.length(); i++){
-            String x = String.valueOf(expresion.charAt(i));
+        for (int i = 0; i < ex.length(); i++){
+            String x = String.valueOf(ex.charAt(i));
             switch (x){
                 case " ":
                 case "(":
@@ -21,35 +21,50 @@ class AritmeticaTest {
                 case "/":
                 case "-":
                 case "*":
-                    operadores.push(x);
+                    op.push(x);
                     break;
                 case ")":
-                    Integer n2 = numeros.pop();
-                    Integer n1 = numeros.pop();
-                    String op = operadores.pop();
-                    switch (op){
+                    Integer n2 = num.pop();
+                    Integer n1 = num.pop();
+                    String operador = op.pop();
+                    switch (operador){
                         case "+":
-                            numeros.push(n1+n2);
+                            num.push(n1+n2);
                             break;
                         case "-":
-                            numeros.push(n1-n2);
+                            num.push(n1-n2);
                             break;
                         case "/":
-                            numeros.push(n1/n2);
+                            num.push(n1/n2);
                             break;
                         case "*":
-                            numeros.push(n1*n2);
+                            num.push(n1*n2);
                             break;
                     }
 
                     break;
                 default:
-                    numeros.push(Integer.parseInt(x));
+                    num.push(Integer.parseInt(x));
                     break;
             }
         }
 
-        // Assert
-        Assertions.assertEquals(11, numeros.pop());
+        Assertions.assertEquals(11, num.pop());
+    }
+
+    @Test
+    void deleteParentesis_shouldReturnExpressionWithoutParenthesis() {
+        String ex = "(+ (+ (+ 2 2) 4) 3)";
+
+        String resp = deleteParentesis(ex);
+
+        Assertions.assertEquals("+++2243", resp);
+    }
+
+    private String deleteParentesis(String exp) {
+        exp = exp.replace("(","");
+        exp = exp.replace(")","");
+        exp = exp.replace(" ", "");
+        return exp;
     }
 }

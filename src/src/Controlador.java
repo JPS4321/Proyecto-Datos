@@ -24,10 +24,9 @@ public class Controlador {
         read.Leer(Respuesta);
         Cadenas = read.lineas;
         for(int i = 0;i <= Cadenas.size()-1;i++) {
-            Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
-
 
             if ((Temporal.contains("+")) || (Temporal.contains("-")) || (Temporal.contains("*")) || (Temporal.contains("/"))) {
+                Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 if (!(Temporal.contains("quote"))) {
                     if (!KeysNormal.isEmpty()) {
                         for (int m = 0; m <= KeysNormal.size() - 1; m++) {
@@ -44,6 +43,7 @@ public class Controlador {
 
             }
             if (Temporal.contains("quote")) {
+                Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 int Cont = 0;
                 int Cont2 = 0;
                 Tokens = Temporal.split("");
@@ -59,6 +59,7 @@ public class Controlador {
                 }
             }
             if (Temporal.contains("setq")) {
+                Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 System.out.println("Variables definidas");
                 Tokens = Temporal.split(" ");
                 if (Tokens.length == 3) {
@@ -88,6 +89,7 @@ public class Controlador {
                 }
             }
             if (Temporal.contains("atom")) {
+                Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 Tokens = Temporal.split(" ");
                 boolean kis = false;
                 for (int b = 0; b <= KeysNormal.size() - 1; b++) {
@@ -110,6 +112,7 @@ public class Controlador {
 
             }
             if (Temporal.contains("equal")) {
+                Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 boolean Comparacion = false;
                 Tokens = Temporal.split(" ");
                 try {
@@ -143,6 +146,7 @@ public class Controlador {
                 }
             }
             if(Temporal.contains("cond")){
+                Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 Tokens = Temporal.split(" ");
                 i = 0;
                 while (i < lista.length) {
@@ -156,6 +160,10 @@ public class Controlador {
                 }
                 return;
             }
+            if(Temporal.contains("Defun")){
+
+            }
+            
 
             /*
             if (x < 0) {

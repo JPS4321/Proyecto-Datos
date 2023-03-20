@@ -22,7 +22,13 @@ public class Controlador {
     String temporal2 = "";
     int SumaParentesis;
 
-
+    /**
+     * Esta funcion sirve para realizar todos los posibles procesos logicos que se piden en el programa.
+     * Guarda las lineas leidas en un array, para mayor facilidad de acceso.
+     * @author Juan Pablo Solis / Esteban Zambrano
+     * @param
+     * @return No regresa ningun dato, al ser una funcion del tipo "void".
+     */
     public void Iniciar(){
         Reader read = new Reader();
         System.out.println("Escriba la direccion de su archivo: ");
@@ -57,6 +63,7 @@ public class Controlador {
 
 
             }
+            //Inicio Funcion Defun, guarda el nombre de la funcion en un hashmap junto a sus parametros
             if(Temporal.contains("defun") || (loops == false) ){
                 loops = false;
                 if(Temporal.contains("defun")){
@@ -84,6 +91,7 @@ public class Controlador {
                     }
                 }
             }
+            //Funcion aritmetica, quita los parentesis.
             if (((Temporal.contains("+")) || (Temporal.contains("-")) || (Temporal.contains("*")) || (Temporal.contains("/"))) && (loops)) {
                 Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 if (!(Temporal.contains("quote"))) {
@@ -101,6 +109,7 @@ public class Controlador {
                 }
 
             }
+            // Esta funcion hace que no se opere lo que se encuentra en la linea
             if (Temporal.contains("quote") && (loops)) {
                 Temporal = Cadenas.get(i).substring(1, Cadenas.get(i).length() - 1);
                 int Cont = 0;
@@ -227,9 +236,12 @@ public class Controlador {
         }
 
         
-        /** 
+        /**
+         *  Esta funcion sirve para realizar todos los posibles procesos logicos que se piden en el programa.
+         *  Es una copia casi exacta del codigo utilizado en la funcion principal, solo que este es utilizado para cuando se utiliza la funcion defun
          * @param i
          * @param Temporal
+         * @return No regresa nada al ser la funcion tipo void.
          */
         public void Interpretes(int i, String Temporal){
             if ((Temporal.contains("+")) || (Temporal.contains("-")) || (Temporal.contains("*")) || (Temporal.contains("/"))){
@@ -248,8 +260,7 @@ public class Controlador {
                     System.out.println(Aritmetica.Matematicas(Temporal));
                 }
 
-            }
-            if (Temporal.contains("quote") && (loops)) {
+            }if (Temporal.contains("quote") && (loops)) {
                 Temporal = Temporal.substring(1, Temporal.length() - 1);
                 int Cont = 0;
                 int Cont2 = 0;
@@ -258,7 +269,8 @@ public class Controlador {
                     if (Tokens[p].contains("(")) {
                         Cont = p;
                     }
-                    if (Tokens[p].contains(")")) {
+                    if
+             (Tokens[p].contains(")")) {
                         Cont2 = p;
                         System.out.println("Operacion quote detectada: ");
                         System.out.println(Temporal.substring(Cont + 1, Cont2));

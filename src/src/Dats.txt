@@ -7,3 +7,6 @@
 (setq prueba1 (1 2 3))
 (setq prueba2 (1 2 3))
 (equal prueba1 prueba2)
+(atom hola)
+(atom prueba1)
+(quote (+ 1 2 3))

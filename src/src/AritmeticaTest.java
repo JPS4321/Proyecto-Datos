@@ -5,6 +5,11 @@ import java.util.Stack;
 
 class AritmeticaTest {
 
+    /**
+     * Esta funcion sirve para observar si esta funcionando de manera correcta una de las funciones matematicas.
+     * @author Edwin Ortega
+     * @return Int
+     */
     @Test
     void evaluar() {
         String ex = "(+ (+ (+ 2 2) 4) 3)";
@@ -52,6 +57,11 @@ class AritmeticaTest {
         Assertions.assertEquals(11, num.pop());
     }
 
+    /**
+     * Esta funcion sirve para remover los parentesis de la expresion
+     * @author Edwin Ortega / Esteban Zambrano
+     * @return String
+     */
     @Test
     void deleteParentesis() {
         String ex = "(+ (+ (+ 2 2) 4) 3)";
@@ -61,9 +71,10 @@ class AritmeticaTest {
         Assertions.assertEquals("+++2243", resp);
     }
 
-    
-    /** 
-     * @param exp
+
+    /**
+     * Esta funcion sirve para remover los parentesis de la expresion
+     * @author Edwin Ortega / Esteban Zambrano
      * @return String
      */
     private String deleteParents(String exp) {

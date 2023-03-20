@@ -1,9 +1,11 @@
 import java.util.*;
 public class Aritmetica {
-    
-    /** 
-     * @param Expresion
-     * @return int
+
+    /**
+     * Esta funcion realiza calculos matematicos de tipo prefix, separa la expresion en multiples partes.
+     * @author Juan Pablo Solis
+     * @param Expresion La expresion tipo prefix
+     * @return Int
      */
     public static int Matematicas(String Expresion) {
         Stack<Integer> stack = new Stack<>();
@@ -31,8 +33,10 @@ public class Aritmetica {
     }
 
     
-    /** 
+    /**
+     * Esta funcion revisa si la expresion revisada es un numero. Si no lo es, entonce devolvera falso
      * @param str
+     * @author Juan Pablo Solis
      * @return boolean
      */
     public static boolean isNumeric(String str) {

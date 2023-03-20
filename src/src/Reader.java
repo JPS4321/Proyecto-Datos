@@ -5,9 +5,10 @@ public class Reader{
 
 
     /** 
-     * @param Arch
+     * @param Arch Es la direccion en donde esta el archivo que se debe leer
+     * @author Juan Pablo Solis
+     * @return String
      */
-    //Reader lee la linea de codigo y se la transfiere al controlador
     public void Leer(String Arch){
         try (BufferedReader br = new BufferedReader(new FileReader(Arch))) {
             String lineaActual;
